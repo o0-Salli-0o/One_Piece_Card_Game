@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990628d81d7e5254f99c1781f756e6fb, type: 3}
+  m_Name: OP02-010
+  m_EditorClassIdentifier: 
+  displayID: 131
+  cardID: OP02-010
+  cardName: Dogura
+  counter: 1000
+  types: ' Mountain Bandits'
+  imageID: OP02-010.png
+  trigger: '-'
+  life: 0
+  colors: ' Red'
+  cardSet: ' -PARAMOUNT WAR- [OP02]'
+  effect: ' [Activate: Main] You may rest this Character: Play up to 1 red Character
+    other than [Dogura] with a cost of 1 from your hand.'
+  imageURL: https://en.onepiece-cardgame.com/images/cardlist/card/OP02-010.png?231031
+  attribute: ' Slash'
+  power: 2000
+  onPlay: 0
+  blocker: 0
+  main: 0
+  donX1: 0
+  donX2: 0
+  rush: 0
+  counterEffect: 0
+  activateMain: 1
+  whenAttacking: 0
+  onKO: 0
+  banish: 0
+  yourTurn: 0
+  endOfYourTurn: 0
+  onYourOppAttack: 0
+  opponentsTurn: 0
+  oncePerTurn: 0
+  restDON: 0
+  donXX: 0
+  doubleAttack: 0
+  isTrigger: 0
+  isLeader: 0
+  isCharacter: 1
+  isEvent: 0
+  isStage: 0
+  isDon: 0
+  spriteImage: {fileID: 0}

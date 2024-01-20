@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990628d81d7e5254f99c1781f756e6fb, type: 3}
+  m_Name: OP05-066
+  m_EditorClassIdentifier: 
+  displayID: 550
+  cardID: OP05-066
+  cardName: Jinbe
+  counter: 1000
+  types: ' Fish-Man/Straw Hat Crew'
+  imageID: OP05-066.png
+  trigger: '-'
+  life: 0
+  colors: ' Purple'
+  cardSet: ' OP-05'
+  effect: ' [Blocker] (After your opponent declares an attack, you may rest this
+    card to make it the new target of the attack.) [Opponent''s Turn] If you have
+    10 DON!! cards on your field, this Character gains +1000 power.'
+  imageURL: https://en.onepiece-cardgame.com/images/cardlist/card/OP05-066.png?231031
+  attribute: ' Strike'
+  power: 6000
+  onPlay: 0
+  blocker: 1
+  main: 0
+  donX1: 0
+  donX2: 0
+  rush: 0
+  counterEffect: 0
+  activateMain: 0
+  whenAttacking: 0
+  onKO: 0
+  banish: 0
+  yourTurn: 0
+  endOfYourTurn: 0
+  onYourOppAttack: 0
+  opponentsTurn: 1
+  oncePerTurn: 0
+  restDON: 0
+  donXX: 0
+  doubleAttack: 0
+  isTrigger: 0
+  isLeader: 0
+  isCharacter: 1
+  isEvent: 0
+  isStage: 0
+  isDon: 0
+  spriteImage: {fileID: 0}
