@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CardToPanelTest : MonoBehaviour
 {
-    public GameObject panel;
-    public GameObject panelCard;
+
+    //public ContentManager contentManager;
+
+    public GameObject parent;
+    public GameObject cardPrefab;
+    //public GameObject pagePrefab;
 
     public static List<CardData> cards = new List<CardData>();
     public static List<CardData> leaderCards = new List<CardData> ();
@@ -16,6 +20,8 @@ public class CardToPanelTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //int counter = 0;
+
         CardDatabaseBehaviour.cards.Reverse();
         cards = CardDatabaseBehaviour.cards;
         databaseSize = cards.Count;
@@ -24,8 +30,18 @@ public class CardToPanelTest : MonoBehaviour
         {
             if (cards[i].IsLeader)
             {
+                //counter++;
                 leaderCards.Add(cards[i]);
-                Instantiate(panelCard, transform.position, transform.rotation);
+                /*if(counter == 13)
+                {
+                    contentManager.contentPanels.Add(Instantiate(pagePrefab, transform.position, transform.rotation));
+                    counter = 0;
+                }*/
+
+                GameObject cardSelectionPage = Instantiate(cardPrefab, transform.position, transform.rotation);
+                cardSelectionPage.transform.SetParent(parent.transform);
+                //contentManager = cardSelectionPage.GetComponent<ContentManager>();
+                //contentManager.contentPanels.Add(cardSelectionPage);
             }
         }
         leaderCardsSize = leaderCards.Count;

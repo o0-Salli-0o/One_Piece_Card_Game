@@ -31,6 +31,7 @@ public class ContentManager : MonoBehaviour
 
     void Start()
     {
+
         nextButton.onClick.AddListener(NextContent);
         prevButton.onClick.AddListener(PreviousContent);
 
