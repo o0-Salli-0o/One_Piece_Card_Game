@@ -6,13 +6,15 @@ using UnityEngine;
 
 public class PageToPanelTest : MonoBehaviour
 {
+    public ContentManager contentManager;
     public GameObject pagePrefab;
 
     private int pageCount;
-    
+
     // Start is called before the first frame update
     void Start()
     {
+        //pageCount = GetLeadersPageCount();
         InitLeaderPages();
     }
 
@@ -28,7 +30,8 @@ public class PageToPanelTest : MonoBehaviour
 
         for(int i = 0; i <= pageCount; i++)
         {
-            Instantiate(pagePrefab, transform.position, transform.rotation);
+            GameObject o = Instantiate(pagePrefab, transform.position, transform.rotation);
+            contentManager.contentPanels.Add(o);
         }
     }
 
@@ -45,7 +48,7 @@ public class PageToPanelTest : MonoBehaviour
                 leaderCount++;
             }
 
-            if(leaderCount == 5)
+            if(leaderCount == 10 /*10=cards/page*/)
             {
                 pageCount++;
                 leaderCount = 0;
@@ -72,4 +75,6 @@ public class PageToPanelTest : MonoBehaviour
         }
         return count;
     }
+
+    public int PageCount { get => pageCount; set => pageCount = value; }
 }

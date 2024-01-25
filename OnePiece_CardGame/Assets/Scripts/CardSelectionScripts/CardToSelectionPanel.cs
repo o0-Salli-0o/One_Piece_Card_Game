@@ -19,9 +19,10 @@ public class CardToSelectionPanel : MonoBehaviour
     void Update()
     {
         //parent = this.GameObject().transform.parent.GameObject();
-        parent = this.gameObject.transform.parent.transform.gameObject;
+        //parent = this.gameObject.transform.parent.transform.gameObject;
+        //parent = this.GameObject();
         //parent = GameObject.Find("CardSelectionPage(Clone)");
-        cardPrefab.transform.SetParent(parent.transform);
+        //cardPrefab.transform.SetParent(parent.transform);
         cardPrefab.transform.localScale = Vector3.one;
         cardPrefab.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
         cardPrefab.transform.eulerAngles = new Vector3(25, 0, 0);

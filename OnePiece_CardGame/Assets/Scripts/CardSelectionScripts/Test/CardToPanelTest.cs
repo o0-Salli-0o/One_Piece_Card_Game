@@ -4,47 +4,24 @@ using UnityEngine;
 
 public class CardToPanelTest : MonoBehaviour
 {
+    //public GameObject cardSelectionPanel;
 
-    //public ContentManager contentManager;
-
-    public GameObject parent;
+    public GameObject pagePrefab;
     public GameObject cardPrefab;
-    //public GameObject pagePrefab;
 
     public static List<CardData> cards = new List<CardData>();
     public static List<CardData> leaderCards = new List<CardData> ();
+    public static List<CardData> helperList = new List<CardData> ();
 
     public static int databaseSize;
     public static int leaderCardsSize;
 
+    private static int curCardIndex;
+
     // Start is called before the first frame update
     void Start()
     {
-        //int counter = 0;
-
-        CardDatabaseBehaviour.cards.Reverse();
-        cards = CardDatabaseBehaviour.cards;
-        databaseSize = cards.Count;
-
-        for(int i = 0; i < cards.Count; i++)
-        {
-            if (cards[i].IsLeader)
-            {
-                //counter++;
-                leaderCards.Add(cards[i]);
-                /*if(counter == 13)
-                {
-                    contentManager.contentPanels.Add(Instantiate(pagePrefab, transform.position, transform.rotation));
-                    counter = 0;
-                }*/
-
-                GameObject cardSelectionPage = Instantiate(cardPrefab, transform.position, transform.rotation);
-                cardSelectionPage.transform.SetParent(parent.transform);
-                //contentManager = cardSelectionPage.GetComponent<ContentManager>();
-                //contentManager.contentPanels.Add(cardSelectionPage);
-            }
-        }
-        leaderCardsSize = leaderCards.Count;
+        CardsToPanel();
     }
 
     // Update is called once per frame
@@ -53,4 +30,36 @@ public class CardToPanelTest : MonoBehaviour
         
     }
 
+    private void CardsToPanel()
+    {
+        cards = CardDatabaseBehaviour.cards;
+        databaseSize = cards.Count;
+
+        int leaderCount = 0;
+
+        while (leaderCount < 10)
+        {
+            if (curCardIndex >= cards.Count) break;
+
+            if (cards[curCardIndex].IsLeader)
+            {
+                leaderCount++;
+                leaderCards.Add(cards[curCardIndex]);
+
+                 CardToPanel();
+            }
+            curCardIndex++;
+        }
+        leaderCardsSize = leaderCards.Count;
+    }
+
+    private void CardToPanel()
+    {
+        GameObject card;
+        card = Instantiate(cardPrefab, transform.position, transform.rotation);
+        card.transform.SetParent(pagePrefab.transform);
+        card.transform.localScale = Vector3.one;
+        card.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
+        card.transform.eulerAngles = new Vector3(25, 0, 0);
+    }
 }

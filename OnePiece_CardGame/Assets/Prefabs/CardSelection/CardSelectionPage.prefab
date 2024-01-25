@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0.392}
+  m_Color: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 250, y: 400}
-  m_Spacing: {x: 30, y: 0}
+  m_Spacing: {x: 30, y: -40}
   m_Constraint: 1
   m_ConstraintCount: 5
 --- !u!114 &6821923826949084568
@@ -143,6 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970a85a1f9d39854d9166600e93ffd59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contentManager: {fileID: 0}
-  parent: {fileID: 5197465530721478733}
+  pagePrefab: {fileID: 5197465530721478733}
   cardPrefab: {fileID: 7850498000891853845, guid: 57b5ed70075d4e74497e362a087a0c28, type: 3}

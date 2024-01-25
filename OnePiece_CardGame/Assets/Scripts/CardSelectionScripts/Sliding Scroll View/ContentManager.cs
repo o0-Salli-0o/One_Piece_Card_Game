@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class ContentManager : MonoBehaviour
 {
-    [Header("Content Vieport")]
+
+    [Header("Content Viewport")]
     public Image contentDisplay;
     public List<GameObject> contentPanels;
 
@@ -51,8 +53,10 @@ public class ContentManager : MonoBehaviour
 
     void InitializeDots()
     {
+        //InitializeContentPanelList();
+
         // Create dots based on the number of content panels
-        for (int i = 0; i < contentPanels.Count; i++)
+        for (int i = 0; i <= GetLeadersPageCount() /*contentPanels.Count*/; i++)
         {
             GameObject dot = Instantiate(dotPrefab, dotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -60,6 +64,36 @@ public class ContentManager : MonoBehaviour
             dotImage.fillAmount = 0f; // Initial fill amount
             // You may want to customize the dot appearance and layout here
         }
+    }
+
+    /*private void InitializeContentPanelList()
+    {
+        for(int i = 0; i <= GetLeadersPageCount(); i++)
+        {
+            contentPanels.Add(pagePrefab);
+        }
+    }*/
+
+    private int GetLeadersPageCount()
+    {
+
+        int leaderCount = 0;
+        int pageCount = 0;
+
+        foreach (CardData card in CardDatabaseBehaviour.cards)
+        {
+            if (card.IsLeader)
+            {
+                leaderCount++;
+            }
+
+            if (leaderCount == 10 /*10=cards/page*/)
+            {
+                pageCount++;
+                leaderCount = 0;
+            }
+        }
+        return pageCount;
     }
 
     void UpdateDots()
@@ -93,7 +127,7 @@ public class ContentManager : MonoBehaviour
     void Update()
     {
         // Detect swipe input only within the content area
-        DetectSwipe();
+        //DetectSwipe();
     }
 
     void DetectSwipe()
@@ -165,7 +199,7 @@ public class ContentManager : MonoBehaviour
     void ShowContent()
     {
         // Activate the current panel and deactivate others
-        for (int i = 0; i < contentPanels.Count; i++)
+        for (int i = 0; i <= GetLeadersPageCount() /*contentPanels.Count*/; i++)
         {
             bool isActive = i == currentIndex;
             contentPanels[i].SetActive(isActive);
