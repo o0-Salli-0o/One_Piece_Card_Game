@@ -41,13 +41,13 @@ public class CardToPanelTest : MonoBehaviour
         {
             if (curCardIndex >= cards.Count) break;
 
-            if (cards[curCardIndex].IsLeader)
-            {
+            //if (cards[curCardIndex].IsLeader)
+            //{
                 leaderCount++;
                 leaderCards.Add(cards[curCardIndex]);
 
                  CardToPanel();
-            }
+            //}
             curCardIndex++;
         }
         leaderCardsSize = leaderCards.Count;

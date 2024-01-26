@@ -43,10 +43,10 @@ public class PageToPanelTest : MonoBehaviour
 
         foreach(CardData card in CardDatabaseBehaviour.cards)
         {
-            if (card.IsLeader)
-            {
+            //if (card.IsLeader)
+            //{
                 leaderCount++;
-            }
+            //}
 
             if(leaderCount == 10 /*10=cards/page*/)
             {

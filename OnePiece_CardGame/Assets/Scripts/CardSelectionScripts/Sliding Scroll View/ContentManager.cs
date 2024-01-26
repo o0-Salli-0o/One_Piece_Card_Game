@@ -38,7 +38,7 @@ public class ContentManager : MonoBehaviour
         prevButton.onClick.AddListener(PreviousContent);
 
         // Initialize dots
-        InitializeDots();
+        //InitializeDots();
 
         // Display initial content
         ShowContent();
@@ -82,10 +82,10 @@ public class ContentManager : MonoBehaviour
 
         foreach (CardData card in CardDatabaseBehaviour.cards)
         {
-            if (card.IsLeader)
-            {
+            //if (card.IsLeader)
+            //{
                 leaderCount++;
-            }
+            //}
 
             if (leaderCount == 10 /*10=cards/page*/)
             {
@@ -205,19 +205,21 @@ public class ContentManager : MonoBehaviour
             contentPanels[i].SetActive(isActive);
 
             // Update dot visibility and color based on the current active content
-            Image dotImage = dotsContainer.transform.GetChild(i).GetComponent<Image>();
-            dotImage.color = isActive ? Color.white : Color.gray;
+
+            //Image dotImage = dotsContainer.transform.GetChild(i).GetComponent<Image>();
+            //dotImage.color = isActive ? Color.white : Color.gray;
 
             if (isActive)
             {
                 // Reset timer and fill amount when the content is swiped
                 timer = autoMoveTime;
-                dotImage.fillAmount = 1f;
+                //dotImage.fillAmount = 1f;
             }
             else
             {
                 // Set the fill amount to 0 for non-active content
-                dotImage.fillAmount = 0f;
+
+                //dotImage.fillAmount = 0f;
             }
         }
     }
