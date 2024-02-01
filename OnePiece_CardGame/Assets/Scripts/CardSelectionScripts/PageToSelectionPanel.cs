@@ -21,8 +21,8 @@ public class PageToSelectionPanel : MonoBehaviour
         parent = GameObject.Find("CardSelectionPanel");
         pagePrefab.transform.SetParent(parent.transform);
         pagePrefab.SetActive(true);
-        pagePrefab.transform.localScale = Vector3.one;
-        pagePrefab.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-        pagePrefab.transform.eulerAngles = new Vector3(25, 0, 0);
+        pagePrefab.transform.localScale = Vector2.one;
+        pagePrefab.transform.position = new Vector2(transform.position.x, transform.position.y);
+        pagePrefab.transform.eulerAngles = new Vector2(25, 0);
     }
 }

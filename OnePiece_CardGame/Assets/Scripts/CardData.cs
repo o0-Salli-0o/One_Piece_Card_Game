@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -141,6 +142,102 @@ public class CardData : ScriptableObject
         //SaveSriptableObject(cardData);
 
         return cardData;
+    }
+
+    public override bool Equals(object obj)
+    {
+        return obj is CardData data &&
+               base.Equals(obj) &&
+               cardID == data.cardID;
+    }
+
+    public override int GetHashCode()
+    {
+        HashCode hash = new HashCode();
+        hash.Add(base.GetHashCode());
+        hash.Add(name);
+        hash.Add(hideFlags);
+        hash.Add(displayID);
+        hash.Add(cardID);
+        hash.Add(cardName);
+        hash.Add(counter);
+        hash.Add(types);
+        hash.Add(imageID);
+        hash.Add(trigger);
+        hash.Add(life);
+        hash.Add(colors);
+        hash.Add(cardSet);
+        hash.Add(effect);
+        hash.Add(imageURL);
+        hash.Add(attribute);
+        hash.Add(power);
+        hash.Add(onPlay);
+        hash.Add(blocker);
+        hash.Add(main);
+        hash.Add(donX1);
+        hash.Add(donX2);
+        hash.Add(rush);
+        hash.Add(counterEffect);
+        hash.Add(activateMain);
+        hash.Add(whenAttacking);
+        hash.Add(onKO);
+        hash.Add(banish);
+        hash.Add(yourTurn);
+        hash.Add(endOfYourTurn);
+        hash.Add(onYourOppAttack);
+        hash.Add(opponentsTurn);
+        hash.Add(oncePerTurn);
+        hash.Add(restDON);
+        hash.Add(donXX);
+        hash.Add(doubleAttack);
+        hash.Add(isTrigger);
+        hash.Add(isLeader);
+        hash.Add(isCharacter);
+        hash.Add(isEvent);
+        hash.Add(isStage);
+        hash.Add(isDon);
+        hash.Add(spriteImage);
+        hash.Add(DisplayID);
+        hash.Add(CardID);
+        hash.Add(CardName);
+        hash.Add(Counter);
+        hash.Add(Types);
+        hash.Add(ImageID);
+        hash.Add(Trigger);
+        hash.Add(Life);
+        hash.Add(Colors);
+        hash.Add(CardSet);
+        hash.Add(Effect);
+        hash.Add(ImageURL);
+        hash.Add(Attribute);
+        hash.Add(Power);
+        hash.Add(OnPlay);
+        hash.Add(Blocker);
+        hash.Add(Main);
+        hash.Add(DonX1);
+        hash.Add(DonX2);
+        hash.Add(Rush);
+        hash.Add(CounterEffect);
+        hash.Add(ActivateMain);
+        hash.Add(WhenAttacking);
+        hash.Add(OnKO);
+        hash.Add(Banish);
+        hash.Add(YourTurn);
+        hash.Add(EndOfYourTurn);
+        hash.Add(OnYourOppAttack);
+        hash.Add(OpponentsTurn);
+        hash.Add(OncePerTurn);
+        hash.Add(RestDON);
+        hash.Add(DonXX);
+        hash.Add(DoubleAttack);
+        hash.Add(IsTrigger);
+        hash.Add(IsLeader);
+        hash.Add(IsCharacter);
+        hash.Add(IsEvent);
+        hash.Add(IsStage);
+        hash.Add(IsDon);
+        hash.Add(SpriteImage);
+        return hash.ToHashCode();
     }
 
     /*public static void SaveSriptableObject(CardData cardData)

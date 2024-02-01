@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 686309013647335424}
   - component: {fileID: 8753006732369391320}
   - component: {fileID: -4171067810943075217}
+  - component: {fileID: 1471377779239173032}
+  - component: {fileID: -2425419149008877818}
   m_Layer: 0
   m_Name: CardInSelectionPanel 1
   m_TagString: Clone
@@ -30,7 +32,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7850498000891853845}
   m_LocalRotation: {x: 0.21643962, y: 0, z: 0, w: 0.976296}
-  m_LocalPosition: {x: 0, y: 0, z: -48}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -137,3 +139,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
   cardPrefab: {fileID: 7850498000891853845}
+--- !u!114 &1471377779239173032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850498000891853845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51141643bd91d544ae1298a5b3cb324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 7850498000891853846}
+  parentAfterDrag: {fileID: 0}
+--- !u!114 &-2425419149008877818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850498000891853845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1

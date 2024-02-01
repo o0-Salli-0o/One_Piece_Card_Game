@@ -58,8 +58,8 @@ public class CardToPanelTest : MonoBehaviour
         GameObject card;
         card = Instantiate(cardPrefab, transform.position, transform.rotation);
         card.transform.SetParent(pagePrefab.transform);
-        card.transform.localScale = Vector3.one;
+        /*card.transform.localScale = Vector3.one;
         card.transform.position = new Vector3(transform.position.x, transform.position.y, -48);
-        card.transform.eulerAngles = new Vector3(25, 0, 0);
+        card.transform.eulerAngles = new Vector3(25, 0, 0);*/
     }
 }
