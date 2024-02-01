@@ -43,6 +43,7 @@ public class LeaderContentManager : MonoBehaviour
         cardInDropPanelCopy.transform.SetParent(parent.transform);
         cardInDropPanelCopy.transform.GetChild(0).GetComponent<Text>().text = cardData.CardName;
         cardInDropPanelCopy.transform.localScale = Vector2.one;
+        cardInDropPanelCopy.transform.GetChild(1).GetComponent<Text>().text = 1.ToString();
     }
 
     private void InitCardData(CardData cardData)
