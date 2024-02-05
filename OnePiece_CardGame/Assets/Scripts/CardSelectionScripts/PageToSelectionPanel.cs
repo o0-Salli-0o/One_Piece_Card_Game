@@ -16,13 +16,11 @@ public class PageToSelectionPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //parent = this.gameObject.transform.parent.gameObject;
-        //parent = GetComponent<GameObject>().gameObject;
-        parent = GameObject.Find("CardSelectionPanel");
+        /*parent = GameObject.Find("CardSelectionPanel");
         pagePrefab.transform.SetParent(parent.transform);
         pagePrefab.SetActive(true);
         pagePrefab.transform.localScale = Vector2.one;
         pagePrefab.transform.position = new Vector2(transform.position.x, transform.position.y);
-        pagePrefab.transform.eulerAngles = new Vector2(25, 0);
+        pagePrefab.transform.eulerAngles = new Vector2(25, 0);*/
     }
 }

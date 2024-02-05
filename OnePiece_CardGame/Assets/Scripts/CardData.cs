@@ -144,6 +144,51 @@ public class CardData : ScriptableObject
         return cardData;
     }
 
+    public bool HasMultipleColors()
+    {
+        return colors.Contains("/");
+    }
+
+    public Color GetColor(String color)
+    {
+        switch (color)
+        {
+            case " Red":
+                //A02229
+                return new Color32(172, 28, 28, 255);
+
+            case " Green":
+                return new Color32(0, 135, 89, 255);
+
+            case " Blue":
+                return new Color32(0, 139, 196, 255);
+
+            case " Purple":
+                return new Color32(148, 57, 140, 255);
+
+            case " Black":
+                return new Color32(39, 36, 36, 255);
+
+            case " Yellow":
+                return new Color32(244, 231, 72, 255);
+        }
+        return Color.white;
+    }
+
+    public Color GetFirstColor()
+    {
+        String[] splitedColors = colors.Split("/");
+        Debug.Log(splitedColors[0]);
+        return GetColor(splitedColors[0]);
+    }
+
+    public Color GetSecondColor()
+    {
+        String[] splitedColors = colors.Split("/");
+        Debug.Log(splitedColors[1]);
+        return GetColor(" " + splitedColors[1]);
+    }
+
     public override bool Equals(object obj)
     {
         return obj is CardData data &&
@@ -155,88 +200,8 @@ public class CardData : ScriptableObject
     {
         HashCode hash = new HashCode();
         hash.Add(base.GetHashCode());
-        hash.Add(name);
-        hash.Add(hideFlags);
-        hash.Add(displayID);
         hash.Add(cardID);
-        hash.Add(cardName);
-        hash.Add(counter);
-        hash.Add(types);
-        hash.Add(imageID);
-        hash.Add(trigger);
-        hash.Add(life);
-        hash.Add(colors);
-        hash.Add(cardSet);
-        hash.Add(effect);
-        hash.Add(imageURL);
-        hash.Add(attribute);
-        hash.Add(power);
-        hash.Add(onPlay);
-        hash.Add(blocker);
-        hash.Add(main);
-        hash.Add(donX1);
-        hash.Add(donX2);
-        hash.Add(rush);
-        hash.Add(counterEffect);
-        hash.Add(activateMain);
-        hash.Add(whenAttacking);
-        hash.Add(onKO);
-        hash.Add(banish);
-        hash.Add(yourTurn);
-        hash.Add(endOfYourTurn);
-        hash.Add(onYourOppAttack);
-        hash.Add(opponentsTurn);
-        hash.Add(oncePerTurn);
-        hash.Add(restDON);
-        hash.Add(donXX);
-        hash.Add(doubleAttack);
-        hash.Add(isTrigger);
-        hash.Add(isLeader);
-        hash.Add(isCharacter);
-        hash.Add(isEvent);
-        hash.Add(isStage);
-        hash.Add(isDon);
-        hash.Add(spriteImage);
-        hash.Add(DisplayID);
-        hash.Add(CardID);
-        hash.Add(CardName);
-        hash.Add(Counter);
-        hash.Add(Types);
-        hash.Add(ImageID);
-        hash.Add(Trigger);
-        hash.Add(Life);
-        hash.Add(Colors);
-        hash.Add(CardSet);
-        hash.Add(Effect);
-        hash.Add(ImageURL);
-        hash.Add(Attribute);
-        hash.Add(Power);
-        hash.Add(OnPlay);
-        hash.Add(Blocker);
-        hash.Add(Main);
-        hash.Add(DonX1);
-        hash.Add(DonX2);
-        hash.Add(Rush);
-        hash.Add(CounterEffect);
-        hash.Add(ActivateMain);
-        hash.Add(WhenAttacking);
-        hash.Add(OnKO);
-        hash.Add(Banish);
-        hash.Add(YourTurn);
-        hash.Add(EndOfYourTurn);
-        hash.Add(OnYourOppAttack);
-        hash.Add(OpponentsTurn);
-        hash.Add(OncePerTurn);
-        hash.Add(RestDON);
-        hash.Add(DonXX);
-        hash.Add(DoubleAttack);
-        hash.Add(IsTrigger);
-        hash.Add(IsLeader);
-        hash.Add(IsCharacter);
-        hash.Add(IsEvent);
-        hash.Add(IsStage);
-        hash.Add(IsDon);
-        hash.Add(SpriteImage);
+       
         return hash.ToHashCode();
     }
 

@@ -21,7 +21,7 @@ public class CardDisplay : MonoBehaviour
     public void Init()
     {
         //databaseSize = CardSelectionPanelScript.databaseSize;
-        databaseSize = CardToPanelTest.databaseSize;
+        //databaseSize = CardToPanelTest.databaseSize;
     }
 
     // Start is called before the first frame update
@@ -41,7 +41,7 @@ public class CardDisplay : MonoBehaviour
             card = CardToPanelTest.cards[databaseSize - 1];
             databaseSize -= 1;
             //CardSelectionPanelScript.databaseSize -= 1;
-            CardToPanelTest.databaseSize -= 1;
+            //CardToPanelTest.databaseSize -= 1;
             this.tag = "Untagged";
         }
 

@@ -5,21 +5,15 @@ using UnityEngine.UI;
 
 public class CardDisplayTest : MonoBehaviour
 {
-    public CardData cardData;
-    public Image cardImage;
+    private CardData cardData;
+    [SerializeField] private Image cardImage;
 
-    // Start is called before the first frame update
-    void Start()
+    public CardData CardData { get => cardData; set => cardData = value; }
+    public Image CardImage { get => cardImage; set => cardImage = value; }
+
+    public void InitCardDisplay(CardData cardData)
     {
-        cardData = CardToPanelTest.leaderCards[CardToPanelTest.leaderCardsSize - 1];
+        this.cardData = cardData;
         cardImage.sprite = cardData.SpriteImage;
-        //CardToPanelTest.databaseSize -= 1;
-        CardToPanelTest.leaderCardsSize -= 1;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

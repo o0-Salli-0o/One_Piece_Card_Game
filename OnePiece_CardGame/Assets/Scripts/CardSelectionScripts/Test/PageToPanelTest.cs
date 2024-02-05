@@ -6,75 +6,53 @@ using UnityEngine;
 
 public class PageToPanelTest : MonoBehaviour
 {
-    public ContentManager contentManager;
-    public GameObject pagePrefab;
+    private static int CARDS_PER_PAGE = 10;
 
-    private int pageCount;
+    public ContentManager contentManager;
+    public GameObject cardSelectionPagePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        //pageCount = GetLeadersPageCount();
-        InitLeaderPages();
+        PagesToSelectionPanel();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void PagesToSelectionPanel()
     {
-        
-    }
-
-    private void InitLeaderPages()
-    {
-        pageCount = GetLeadersPageCount();
-
-        for(int i = 0; i <= pageCount; i++)
+        for(int i = 0; i <= PageCount(); i++)
         {
-            GameObject o = Instantiate(pagePrefab, transform.position, transform.rotation);
-            contentManager.contentPanels.Add(o);
+            PageToSelectionPanel();
         }
     }
 
-    private int GetLeadersPageCount()
+    private int PageCount()
     {
 
-        int leaderCount = 0;
+        int cardCount = 0;
         int pageCount = 0;
 
         foreach(CardData card in CardDatabaseBehaviour.cards)
         {
-            //if (card.IsLeader)
-            //{
-                leaderCount++;
-            //}
+            cardCount++;
 
-            if(leaderCount == 10 /*10=cards/page*/)
+            if(cardCount == CARDS_PER_PAGE)
             {
                 pageCount++;
-                leaderCount = 0;
+                cardCount = 0;
             }
         }
 
         return pageCount;
-
-        //int leadCardCount = GetLeaderCardCount();
-        //pageCount = leadCardCount / 10; /* 10 = nr of cards in one page */        
-        
     }
 
-    private int GetLeaderCardCount()
+    private void PageToSelectionPanel()
     {
-        int count = 0;
-
-        foreach (CardData card in CardDatabaseBehaviour.cards)
-        {
-            if (card.IsLeader)
-            {
-                count++;
-            }
-        }
-        return count;
+        GameObject cardSelectionPageCopy = Instantiate(cardSelectionPagePrefab, transform.position, transform.rotation);
+        cardSelectionPageCopy.transform.SetParent(this.transform);
+        cardSelectionPageCopy.SetActive(true);
+        cardSelectionPageCopy.transform.localScale = Vector2.one;
+        cardSelectionPageCopy.transform.position = new Vector2(transform.position.x, transform.position.y);
+        cardSelectionPageCopy.transform.eulerAngles = new Vector2(25, 0);
+        contentManager.contentPanels.Add(cardSelectionPageCopy);
     }
-
-    public int PageCount { get => pageCount; set => pageCount = value; }
 }

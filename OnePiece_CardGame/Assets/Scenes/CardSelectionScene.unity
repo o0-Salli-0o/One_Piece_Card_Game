@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 128094740}
   - component: {fileID: 128094739}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: CardSetText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'All Decks
+  m_Text: 'Card Set(s)
 
 '
 --- !u!222 &128094740
@@ -4978,7 +4978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contentManager: {fileID: 1056580249}
-  pagePrefab: {fileID: 5197465530721478733, guid: c3a9f7e4086c99e4ba34e43fb940d05e, type: 3}
+  cardSelectionPagePrefab: {fileID: 5197465530721478733, guid: c3a9f7e4086c99e4ba34e43fb940d05e, type: 3}
 --- !u!1 &583383294
 GameObject:
   m_ObjectHideFlags: 0
@@ -5285,7 +5285,7 @@ GameObject:
   - component: {fileID: 624335580}
   - component: {fileID: 624335579}
   m_Layer: 0
-  m_Name: Text (Legacy) (1)
+  m_Name: LeaderHeaderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5344,7 +5344,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Leader (1/1)
+  m_Text: Leader (0/1)
 --- !u!222 &624335580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6579,7 +6579,7 @@ GameObject:
   - component: {fileID: 849665234}
   - component: {fileID: 849665233}
   m_Layer: 0
-  m_Name: Text (Legacy) (1)
+  m_Name: PlayerHeaderText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6638,7 +6638,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Deck (15/50)
+  m_Text: Deck (0/50)
 --- !u!222 &849665234
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6915,6 +6915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428db88cabfef6949a2227585887f15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leaderHeaderText: {fileID: 624335579}
 --- !u!1 &874786135
 GameObject:
   m_ObjectHideFlags: 0
@@ -11217,7 +11218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15430,6 +15431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f32755b67ee5b640a7872c2f9faf12c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHeaderText: {fileID: 849665233}
 --- !u!1 &1838689995
 GameObject:
   m_ObjectHideFlags: 0
