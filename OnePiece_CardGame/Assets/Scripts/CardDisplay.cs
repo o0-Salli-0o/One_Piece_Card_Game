@@ -38,7 +38,7 @@ public class CardDisplay : MonoBehaviour
         {
             Debug.Log("b: " + i++);
             //card = CardSelectionPanelScript.staticDatabaseList[databaseSize - 1];
-            card = CardToPanelTest.cards[databaseSize - 1];
+            //card = CardToPanelTest.cards[databaseSize - 1];
             databaseSize -= 1;
             //CardSelectionPanelScript.databaseSize -= 1;
             //CardToPanelTest.databaseSize -= 1;

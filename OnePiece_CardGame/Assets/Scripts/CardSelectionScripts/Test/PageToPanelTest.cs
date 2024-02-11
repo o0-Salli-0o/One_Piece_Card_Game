@@ -2,6 +2,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class PageToPanelTest : MonoBehaviour
@@ -11,15 +12,17 @@ public class PageToPanelTest : MonoBehaviour
     public ContentManager contentManager;
     public GameObject cardSelectionPagePrefab;
 
+    private List<CardData> cards;
+
     // Start is called before the first frame update
     void Start()
     {
-        PagesToSelectionPanel();
+        PagesToSelectionPanel(PageCount());
     }
 
-    private void PagesToSelectionPanel()
+    public void PagesToSelectionPanel(int nrOfPages)
     {
-        for(int i = 0; i <= PageCount(); i++)
+        for(int i = 0; i <= nrOfPages; i++)
         {
             PageToSelectionPanel();
         }
@@ -27,11 +30,12 @@ public class PageToPanelTest : MonoBehaviour
 
     private int PageCount()
     {
+        cards = CardDatabaseBehaviour.cards;
 
         int cardCount = 0;
         int pageCount = 0;
 
-        foreach(CardData card in CardDatabaseBehaviour.cards)
+        foreach(CardData card in cards)
         {
             cardCount++;
 
@@ -41,7 +45,6 @@ public class PageToPanelTest : MonoBehaviour
                 cardCount = 0;
             }
         }
-
         return pageCount;
     }
 

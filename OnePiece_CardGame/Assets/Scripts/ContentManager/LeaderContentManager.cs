@@ -106,7 +106,7 @@ public class LeaderContentManager : MonoBehaviour
         UpdateDotsInCardInSelectionPanel(cardInDropPanelCopy);
     }
 
-    private void UpdateDotsInCardInSelectionPanel(GameObject cardInDropPanelCopy)
+    public void UpdateDotsInCardInSelectionPanel(GameObject cardInDropPanelCopy)
     {
         GameObject cardInSelectionPanel = cardInDropPanelCopy.GetComponent<DisplayCardInDropPanel>().CardInSelectionPanel;
         GameObject dotPanel = cardInSelectionPanel.transform.GetChild(0).gameObject;

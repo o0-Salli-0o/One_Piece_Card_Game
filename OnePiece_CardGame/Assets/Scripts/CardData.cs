@@ -178,14 +178,12 @@ public class CardData : ScriptableObject
     public Color GetFirstColor()
     {
         String[] splitedColors = colors.Split("/");
-        Debug.Log(splitedColors[0]);
         return GetColor(splitedColors[0]);
     }
 
     public Color GetSecondColor()
     {
         String[] splitedColors = colors.Split("/");
-        Debug.Log(splitedColors[1]);
         return GetColor(" " + splitedColors[1]);
     }
 

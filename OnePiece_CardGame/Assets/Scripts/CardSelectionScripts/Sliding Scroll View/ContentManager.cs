@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.Android;
 
 public class ContentManager : MonoBehaviour
 {
@@ -28,27 +29,42 @@ public class ContentManager : MonoBehaviour
     public float swipeThreshold = 50f;
     private Vector2 touchStartPos;
 
-    // Reference to the RectTransform of the content area
-    public RectTransform contentArea;
+    public GameObject cardSelectionPanel;
+    public GameObject cardContainer;
+
+    private const string ALL_CARDS = "All";
+    private const string RED_CARDS = "Red";
+    private const string GREEN_CARDS = "Green";
+    private const string BLUE_CARDS = "Blue";
+    private const string PURPLE_CARDS = "Purple";
+    private const string BLACK_CARDS = "Black";
+    private const string YELLOW_CARDS = "Yellow";
+
+    private const string LEADER_CARDS = "Leader";
+    private const string CHARACTER_CARDS = "Character";
+    private const string STAGE_CARDS = "Stage";
+    private const string EVENT_CARDS = "Event";
 
     void Start()
     {
-
         nextButton.onClick.AddListener(NextContent);
         prevButton.onClick.AddListener(PreviousContent);
 
         // Initialize dots
         //InitializeDots();
 
+        //InitContentPages();
+        InitContentPagesTest(CardDatabaseBehaviour.cards);
+
         // Display initial content
-        ShowContent();
+        //ShowContent();
 
         // Start auto-move timer if enabled
-        if (useTimer)
+        /*if (useTimer)
         {
             timer = autoMoveTime;
             InvokeRepeating("AutoMoveContent", 1f, 1f); // Invoke every second to update the timer
-        }
+        }*/
     }
 
     void InitializeDots()
@@ -56,7 +72,7 @@ public class ContentManager : MonoBehaviour
         //InitializeContentPanelList();
 
         // Create dots based on the number of content panels
-        for (int i = 0; i <= GetLeadersPageCount() /*contentPanels.Count*/; i++)
+        for (int i = 0; i <= GetPageCountOf(CardDatabaseBehaviour.cards) /*contentPanels.Count*/; i++)
         {
             GameObject dot = Instantiate(dotPrefab, dotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -74,23 +90,23 @@ public class ContentManager : MonoBehaviour
         }
     }*/
 
-    private int GetLeadersPageCount()
+    private int GetPageCountOf(List<CardData> cards)
     {
 
-        int leaderCount = 0;
+        int cardCount = 0;
         int pageCount = 0;
 
-        foreach (CardData card in CardDatabaseBehaviour.cards)
+        foreach (CardData card in cards)
         {
             //if (card.IsLeader)
             //{
-                leaderCount++;
+                cardCount++;
             //}
 
-            if (leaderCount == 10 /*10=cards/page*/)
+            if (cardCount == 10 /*10=cards/page*/)
             {
                 pageCount++;
-                leaderCount = 0;
+                cardCount = 0;
             }
         }
         return pageCount;
@@ -166,7 +182,8 @@ public class ContentManager : MonoBehaviour
     // Check if the touch position is within the content area bounds
     bool IsTouchInContentArea(Vector2 touchPosition)
     {
-        return RectTransformUtility.RectangleContainsScreenPoint(contentArea, touchPosition);
+        //return RectTransformUtility.RectangleContainsScreenPoint(contentArea, touchPosition);
+        return false;
     }
 
     void AutoMoveContent()
@@ -196,13 +213,25 @@ public class ContentManager : MonoBehaviour
         UpdateDots();
     }
 
-    void ShowContent()
+    public void ShowContent()
     {
-        // Activate the current panel and deactivate others
-        for (int i = 0; i <= GetLeadersPageCount() /*contentPanels.Count*/; i++)
+        /*for(int a = 0; a <= GetPageCount(); a++)
         {
+            contentPanels[a].SetActive(true);
+            contentPanels[a].GetComponent<CardToPanelTest>().CardsToPanel();
+        }*/
+
+            // Activate the current panel and deactivate others
+        for (int i = 0; i < contentPanels.Count /*contentPanels.Count*/; i++)
+        {
+            /*if (contentPanels[i].transform.childCount == 0)
+            {
+                AddCardsToPage(contentPanels[i]);
+            }*/
+
             bool isActive = i == currentIndex;
             contentPanels[i].SetActive(isActive);
+            //Debug.Log(contentPanels.Count/*contentPanels[0].transform.childCount*/);
 
             // Update dot visibility and color based on the current active content
 
@@ -232,5 +261,130 @@ public class ContentManager : MonoBehaviour
             ShowContent();
             UpdateDots();
         }
+    }
+
+    public void FilterBy(Text filterCriteria)
+    {
+        MoveContentCardsToContainer();
+        DestroyPages();
+        MoveContainerCardsToContent(filterCriteria.text.ToString());
+    }
+
+    private void MoveContainerCardsToContent(string filterCriteria)
+    {
+        List<GameObject> cards = cardContainer.GetComponent<CardContainer>().GetCardsBy(filterCriteria);
+
+        int nrOfPages = GetNumberOfPages(cards);
+        cardSelectionPanel.GetComponent<PageToPanelTest>().PagesToSelectionPanel(nrOfPages);
+        InitContentPagesTest(TransformList(cards));
+    }
+
+    private int GetNumberOfPages(List<GameObject> cards)
+    {
+        int CARDS_PER_PAGE = 10;
+        int cardCount = 0;
+        int pageCount = 0;
+
+        foreach(GameObject card in cards)
+        {
+            cardCount++;
+
+            if (cardCount == CARDS_PER_PAGE)
+            {
+                pageCount++;
+                cardCount = 0;
+            }
+        }
+        return pageCount;
+    }
+
+    private void MoveContentCardsToContainer()
+    {
+        List<GameObject> contentCards = GetContentCards();
+
+        foreach(GameObject card in contentCards)
+        {
+            cardContainer.GetComponent<CardContainer>().Add(card);
+        }
+
+        cardContainer.GetComponent<CardContainer>().Sort();
+    }
+
+    private List<GameObject> GetContentCards()
+    {
+        List<GameObject> resultList = new();
+
+        for(int i = 0; i < contentPanels.Count /*cardSelectionPanel.transform.childCount*/; i++)
+        {
+            //GameObject cardSelectionPage = cardSelectionPanel.transform.GetChild(i).gameObject;
+
+            GameObject cardSelectionPage = contentPanels[i];
+
+            for(int j = 0; j < cardSelectionPage.transform.childCount; j++)
+            {
+                resultList.Add(cardSelectionPage.transform.GetChild(j).gameObject);
+            }
+        }
+        return resultList;
+    }
+
+    private void DestroyPages()
+    {
+        for(int i = 0; i < cardSelectionPanel.transform.childCount; i++)
+        {
+            GameObject cardSelectionPage = cardSelectionPanel.transform.GetChild(i).gameObject;
+            contentPanels.Clear();
+            Destroy(cardSelectionPage);
+        }
+    }
+
+    private void InitContentPages()
+    {
+        for(int i = 0; i < contentPanels.Count; i++)
+        {
+
+            GameObject cardSelectionPage = contentPanels[i];
+            AddCardsToPage(cardSelectionPage);
+        }
+    }
+
+    private void InitContentPagesTest(List<CardData> cards)
+    {
+        int pageIndex = 0;
+
+        List<CardData> cardsOfPage = new();
+
+        CardData lastCard = cards[cards.Count - 1];
+
+        foreach (CardData card in cards)
+        {
+
+            cardsOfPage.Add(card);
+
+            if(cardsOfPage.Count == 10 || card.CardID == lastCard.CardID)
+            {
+                GameObject cardSelectionPage = contentPanels[pageIndex++];
+                cardSelectionPage.GetComponent<CardToPanelTest>().CardsToPanel(cardsOfPage);
+                cardsOfPage.Clear();
+            }
+        }
+
+        SetCurrentIndex(0);
+    }
+
+    private List<CardData> TransformList(List<GameObject> transformList)
+    {
+        List<CardData> resultList = new List<CardData>();
+
+        foreach(GameObject card in transformList)
+        {
+            resultList.Add(card.GetComponent<CardDisplayTest>().CardData);
+        }
+        return resultList;
+    }
+
+    private void AddCardsToPage(GameObject cardSelectionPage)
+    {
+        cardSelectionPage.GetComponent<CardToPanelTest>().CardsToPanel();
     }
 }

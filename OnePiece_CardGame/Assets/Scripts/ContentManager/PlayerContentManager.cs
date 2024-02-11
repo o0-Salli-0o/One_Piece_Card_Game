@@ -11,6 +11,7 @@ public class PlayerContentManager : MonoBehaviour
     private Button playerButton;
 
     private List<CardData> cards = new List<CardData>();
+    private static List<GameObject> cardsInDropPanel = new();
 
     public void Instantiate(GameObject cardInDropPanel, GameObject parent, CardData currCardData, GameObject cardInSelectionPanel)
     {
@@ -62,6 +63,7 @@ public class PlayerContentManager : MonoBehaviour
         GameObject cardInDropPanelCopy = Instantiate(cardInDropPanel, transform.position, transform.rotation);
         cardInDropPanelCopy.transform.SetParent(parent.transform);
         cardInDropPanelCopy.transform.localScale = Vector2.one;
+        cardsInDropPanel.Add(cardInDropPanelCopy);
         return cardInDropPanelCopy;
     }
 

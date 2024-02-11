@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CardToPanelTest : MonoBehaviour
@@ -9,56 +11,76 @@ public class CardToPanelTest : MonoBehaviour
     public GameObject pagePrefab;
     public GameObject cardPrefab;
 
-    public static List<CardData> cards = new();
-
-    private readonly List<CardData> cardsOfPage = new();
+    //public static List<CardData> cards = new();
 
     private static int curCardIndex;
 
-    // Start is called before the first frame update
-    void Start()
+    public void CardsToPanel(List<CardData> cards)
     {
-        CardsToPanel();
+        GameObject cardContainer = GameObject.Find("CardContainer");
+        List<GameObject> cardsPerPage = new();
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            GameObject cardInSelectionPage = GetCardFromContainer(cards[i], cardContainer);
+            cardsPerPage.Add(cardInSelectionPage);
+        }
+
+        foreach (GameObject card in cardsPerPage)
+        {
+
+            CardToPanel(card, cardContainer);
+        }
     }
 
-    private void CardsToPanel()
+    private GameObject GetCardFromContainer(CardData cardData, GameObject cardContainer)
     {
-        cards = CardDatabaseBehaviour.cards;
+        GameObject cardInSelectionPage = null;
+
+        for (int i = 0; i < cardContainer.transform.childCount; i++)
+        {
+            GameObject child = cardContainer.transform.GetChild(i).gameObject;
+
+            if (child.GetComponent<CardDisplayTest>().CardData.Equals(cardData))
+            {
+                cardInSelectionPage = child;
+            }
+        }
+        return cardInSelectionPage;
+    }
+
+    public void CardsToPanel()
+    {
+        GameObject cardContainer = GameObject.Find("CardContainer");
+        List<GameObject> cardsPerPage = new();
 
         for (int i = 0; i < CARDS_PER_PAGE; i++)
         {
-            // in case the last page contains only 9 or less cards
-            if (curCardIndex >= cards.Count) break;
+            if (curCardIndex >= CardDatabaseBehaviour.cards.Count)
+            {
+                ResetCurCardIndex();
+                break;
+            }
 
-            CardToPanel();
-            cardsOfPage.Add(cards[curCardIndex]);
+            GameObject cardInSelectionPage = cardContainer.transform.GetChild(i).gameObject;
+            cardsPerPage.Add(cardInSelectionPage);
             curCardIndex++;
         }
-    }
 
-    private void CardToPanel()
-    {
-        GameObject cardInSelectionPanelCopy;
-        cardInSelectionPanelCopy = Instantiate(cardPrefab, transform.position, transform.rotation);
-        cardInSelectionPanelCopy.transform.SetParent(pagePrefab.transform);
-        cardInSelectionPanelCopy.GetComponent<CardDisplayTest>().InitCardDisplay(cards[curCardIndex]);
-        cardInSelectionPanelCopy.transform.localScale = Vector2.one;
-
-        if (cardInSelectionPanelCopy.GetComponent<CardDisplayTest>().CardData.IsLeader)
+        foreach (GameObject card in cardsPerPage)
         {
-            HideDots(cardInSelectionPanelCopy);
+
+            CardToPanel(card, cardContainer);
         }
     }
 
-    private void HideDots(GameObject cardInSelectionPanelCopy)
+    private void CardToPanel(GameObject card, GameObject cardContainer)
     {
-        GameObject dotPanel = cardInSelectionPanelCopy.transform.GetChild(0).gameObject;
-        GameObject dot0 = dotPanel.transform.GetChild(0).gameObject;
-        GameObject dot1 = dotPanel.transform.GetChild(1).gameObject;
-        GameObject dot3 = dotPanel.transform.GetChild(3).gameObject;
+        cardContainer.GetComponent<CardContainer>().RemoveTo(card, pagePrefab);
+    }
 
-        dot0.SetActive(false);
-        dot1.SetActive(false);
-        dot3.SetActive(false);
+    private static void ResetCurCardIndex()
+    {
+        curCardIndex = 0;
     }
 }
