@@ -12,36 +12,35 @@ public class PageToPanelTest : MonoBehaviour
     public ContentManager contentManager;
     public GameObject cardSelectionPagePrefab;
 
-    private List<CardData> cards;
-
     // Start is called before the first frame update
     void Start()
     {
-        PagesToSelectionPanel(PageCount());
+        PagesToSelectionPanel(CardDatabaseBehaviour.cards);
     }
 
-    public void PagesToSelectionPanel(int nrOfPages)
+    public void PagesToSelectionPanel(List<CardData> cards)
     {
-        for(int i = 0; i <= nrOfPages; i++)
+        for(int i = 0; i <= PageCount(cards); i++)
         {
             PageToSelectionPanel();
         }
     }
 
-    private int PageCount()
+    private int PageCount(List<CardData> cards)
     {
-        cards = CardDatabaseBehaviour.cards;
-
         int cardCount = 0;
         int pageCount = 0;
 
-        foreach(CardData card in cards)
+        for (int i = 0; i < cards.Count; i++)
         {
             cardCount++;
 
             if(cardCount == CARDS_PER_PAGE)
             {
-                pageCount++;
+                if(i < cards.Count - 1)
+                {
+                    pageCount++;
+                }
                 cardCount = 0;
             }
         }

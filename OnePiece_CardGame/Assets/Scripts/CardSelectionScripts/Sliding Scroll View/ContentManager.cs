@@ -54,7 +54,7 @@ public class ContentManager : MonoBehaviour
         //InitializeDots();
 
         //InitContentPages();
-        InitContentPagesTest(CardDatabaseBehaviour.cards);
+        InitContentPages(CardDatabaseBehaviour.cards);
 
         // Display initial content
         //ShowContent();
@@ -72,7 +72,7 @@ public class ContentManager : MonoBehaviour
         //InitializeContentPanelList();
 
         // Create dots based on the number of content panels
-        for (int i = 0; i <= GetPageCountOf(CardDatabaseBehaviour.cards) /*contentPanels.Count*/; i++)
+        for (int i = 0; i <= /*GetPageCountOf(CardDatabaseBehaviour.cards)*/ contentPanels.Count; i++)
         {
             GameObject dot = Instantiate(dotPrefab, dotsContainer.transform);
             Image dotImage = dot.GetComponent<Image>();
@@ -222,7 +222,7 @@ public class ContentManager : MonoBehaviour
         }*/
 
             // Activate the current panel and deactivate others
-        for (int i = 0; i < contentPanels.Count /*contentPanels.Count*/; i++)
+        for (int i = 0; i < contentPanels.Count; i++)
         {
             /*if (contentPanels[i].transform.childCount == 0)
             {
@@ -273,29 +273,10 @@ public class ContentManager : MonoBehaviour
     private void MoveContainerCardsToContent(string filterCriteria)
     {
         List<GameObject> cards = cardContainer.GetComponent<CardContainer>().GetCardsBy(filterCriteria);
+        List<CardData> cardsData = TransformList(cards);
 
-        int nrOfPages = GetNumberOfPages(cards);
-        cardSelectionPanel.GetComponent<PageToPanelTest>().PagesToSelectionPanel(nrOfPages);
-        InitContentPagesTest(TransformList(cards));
-    }
-
-    private int GetNumberOfPages(List<GameObject> cards)
-    {
-        int CARDS_PER_PAGE = 10;
-        int cardCount = 0;
-        int pageCount = 0;
-
-        foreach(GameObject card in cards)
-        {
-            cardCount++;
-
-            if (cardCount == CARDS_PER_PAGE)
-            {
-                pageCount++;
-                cardCount = 0;
-            }
-        }
-        return pageCount;
+        cardSelectionPanel.GetComponent<PageToPanelTest>().PagesToSelectionPanel(cardsData);
+        InitContentPages(cardsData);
     }
 
     private void MoveContentCardsToContainer()
@@ -314,10 +295,8 @@ public class ContentManager : MonoBehaviour
     {
         List<GameObject> resultList = new();
 
-        for(int i = 0; i < contentPanels.Count /*cardSelectionPanel.transform.childCount*/; i++)
+        for(int i = 0; i < contentPanels.Count; i++)
         {
-            //GameObject cardSelectionPage = cardSelectionPanel.transform.GetChild(i).gameObject;
-
             GameObject cardSelectionPage = contentPanels[i];
 
             for(int j = 0; j < cardSelectionPage.transform.childCount; j++)
@@ -338,17 +317,7 @@ public class ContentManager : MonoBehaviour
         }
     }
 
-    private void InitContentPages()
-    {
-        for(int i = 0; i < contentPanels.Count; i++)
-        {
-
-            GameObject cardSelectionPage = contentPanels[i];
-            AddCardsToPage(cardSelectionPage);
-        }
-    }
-
-    private void InitContentPagesTest(List<CardData> cards)
+    private void InitContentPages(List<CardData> cards)
     {
         int pageIndex = 0;
 
@@ -381,10 +350,5 @@ public class ContentManager : MonoBehaviour
             resultList.Add(card.GetComponent<CardDisplayTest>().CardData);
         }
         return resultList;
-    }
-
-    private void AddCardsToPage(GameObject cardSelectionPage)
-    {
-        cardSelectionPage.GetComponent<CardToPanelTest>().CardsToPanel();
     }
 }

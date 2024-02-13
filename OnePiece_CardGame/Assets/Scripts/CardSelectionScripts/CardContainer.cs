@@ -29,7 +29,7 @@ public class CardContainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colors = new List<string>() {RED_CARDS, GREEN_CARDS, BLUE_CARDS, PURPLE_CARDS, BLACK_CARDS, YELLOW_CARDS};
+        colors = new List<string>() { RED_CARDS, GREEN_CARDS, BLUE_CARDS, PURPLE_CARDS, BLACK_CARDS, YELLOW_CARDS };
         types = new List<string>() { LEADER_CARDS, CHARACTER_CARDS, STAGE_CARDS, EVENT_CARDS };
 
         FillContainer();
